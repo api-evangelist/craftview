@@ -1,0 +1,48 @@
+generated: '2026-07-20'
+method: probed
+source: live HTTP probes of Craftview web + brand hosts
+summary: >-
+  No /.well-known/ discovery documents are published on the Craftview corporate host.
+  Every RFC 9116 / OIDC / RFC 8414 / api-catalog / ai-plugin path probed returned 404.
+  Recorded as an honest negative result; no WellKnown or SecurityTxt pointer is wired
+  in apis.yml because no document exists.
+hosts:
+- host: https://www.craftview.de
+  documents:
+  - path: /.well-known/security.txt
+    status: 404
+  - path: /.well-known/openid-configuration
+    status: 404
+  - path: /.well-known/oauth-authorization-server
+    status: 404
+  - path: /.well-known/api-catalog
+    status: 404
+  - path: /.well-known/ai-plugin.json
+    status: 404
+  - path: /llms.txt
+    status: 404
+  - path: /robots.txt
+    status: 200
+  - path: /sitemap.xml
+    status: 200
+- host: https://api.extrabat.com
+  note: >-
+    Live JSON API host belonging to EXTRABAT, one of the Craftview brands. The root
+    returns a Symfony routing error ({"message":"No route found for \"GET
+    http://api.extrabat.com/\""}), confirming a real running API, but no public
+    documentation, OpenAPI definition, or developer portal was found for it. Recorded
+    as an observation only — no API entry is claimed in apis.yml without published
+    documentation.
+  documents:
+  - path: /
+    status: 404
+  - path: /docs
+    status: 404
+  - path: /swagger.json
+    status: 404
+  - path: /openapi.json
+    status: 404
+  - path: /.well-known/security.txt
+    status: 404
+  - path: /.well-known/openid-configuration
+    status: 404
